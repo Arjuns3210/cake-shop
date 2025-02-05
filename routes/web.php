@@ -34,6 +34,7 @@ Route::group(['middleware'=>'web'],function(){
 
 		//for order
 		Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+		Route::get('/order-confirmation', [OrderController::class, 'confirmation'])->name('order.confirmation');
 
 		Route::get("track_order", [OrderController::class, "trackOrder"]);
 		Route::post("orderSave", [OrderController::class, "orderSave"]);

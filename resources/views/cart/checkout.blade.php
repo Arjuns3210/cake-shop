@@ -280,6 +280,7 @@
                                         <input class="form-check-input" type="radio" name="payment_type" value="cod"
                                             id="cod" required>
                                         <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
+                                        <input type="hidden" class="form-control" id="address_id" name="address_id" value="">
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="payment_type" value="online"
@@ -331,27 +332,6 @@ window.addEventListener('load', function() {
             'opacity': ''
         })
     })
-    // $('#bAdd1').click(function(){
-    //   $('#changeAdd').removeAttr('hidden');
-    //   $('.card-header').removeAttr('style');
-    //   $('.three').css({'backgroundColor':'#b3eeff'})
-    //   $('.head1').css({'opacity':'0.5'})
-
-    // })
-    // $('#bAdd2').click(function(){
-    //   $('#changeAdd').removeAttr('hidden');
-    //   $('.card-header').removeAttr('style');
-    //   $('.three').css({'backgroundColor':'#b3eeff'})
-    //   $('.head1').css({'opacity':'0.5'})
-
-    // })
-    // $('#bAdd3').click(function(){
-    //   $('#changeAdd').removeAttr('hidden');
-    //   $('.card-header').removeAttr('style');
-    //   $('.three').css({'backgroundColor':'#b3eeff'})
-    //   $('.head1').css({'opacity':'0.5'})
-
-    // })
     $('#changeAdd').click(function() {
         $(this).prop('hidden', true);
         $('.card-header').css({
@@ -400,6 +380,7 @@ function myFunction() {
 }
 
 function delivery(id) {
+    var add = document.getElementById('address_id').value=id;
     var half = document.getElementById('halfAdd' + id).innerHTML;
     var name = document.getElementById('nameAdd' + id).innerHTML;
     document.getElementById('fullAdd').innerHTML = '<strong>' + name + '</strong>' + " " + half;

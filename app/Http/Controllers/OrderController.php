@@ -25,30 +25,39 @@ class OrderController extends Controller
      */
     public function placeOrder(Request $request)
     {
-        // Validate request
+        $user_id = session('Uid');
         $request->validate([
             'payment_type' => 'required|in:cod,online',
         ]);
-
+        $payment_amount = Cart::where('user_id', $user_id)->sum('cake_price');
+        
         // Create order
         $order = new Order();
-        $order->user_id = $request->id;
-        $order->total_price = Cart::where('user_id', $request->id)->sum('cake_price');
+        $order->user_id = $user_id;
+        $order->address_id = $request->address_id;
+        $order->payment_amount = $payment_amount;
         $order->payment_type = $request->payment_type;
         $order->status = ($request->payment_type == 'cod') ? 'Pending' : 'Processing';
+
         $order->save();
 
         // Clear cart after order
-        Cart::where('user_id', $user->id)->delete();
+        Cart::where('user_id', $user_id)->delete();
 
         // Redirect based on payment type
         if ($request->payment_type == 'online') {
             return redirect()->route('payment.process', ['order_id' => $order->id]);
         } else {
-            return redirect()->route('order.confirmation')->with('success', 'Order placed successfully!');
+            return redirect()->route('order.confirmation', ['order_id' => $order->id])->with('success', 'Order placed successfully!');
         }
     }
 
+    public function confirmation(Request $request)
+    {
+        $data['order']= Order::with('address')->where('id', $request->order_id)->get();
+
+        return view('order.confirmation',$data);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -60,8 +69,6 @@ class OrderController extends Controller
     {
         \Log::info("inside of save order");
        $order = new order();
-       $order->fname=$request->firstName;
-       $order->lname=$request->lastName;
        $order->payment_amount=$request->payment_amount;
        // $order->payment_type=$request->payment_type;
        $order->email=$request->email;

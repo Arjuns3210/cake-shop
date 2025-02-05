@@ -21,8 +21,8 @@ class CartController extends Controller
     public function index()
     {
         $user_id = session::get('Uid');
-        $data['cart_items'] = Cart::where('user_id',$user_id)->get();
-        // dd($data['cart_items']);
+        $data['cart_items'] = Cart::with('cake')->where('user_id',$user_id)->get();
+
         $data['count'] = $data['cart_items']->sum('cake_quentity');
         $data['cartP'] = $data['cart_items']->sum('cake_price'); 
 
@@ -105,15 +105,16 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
 
-        $data['cart_items'] = Cart::all();
-        $data['cartP'] = Cart::sum('cake_price');
+        $user_id = session('Uid');
+        $data['cart_items'] = Cart::with('cake')->where('user_id',$user_id)->get();
+        $data['cartP'] = $data['cart_items']->sum('cake_price'); 
 
-        $value = session('Uid');
-        $data['user'] = User::where('id',$value)->first();
-        if($data['user']){
-            $data['address'] = AddressBook::where('user_id',$data['user']->id)->get();
-            return view('cart.checkout',$data);
-        }else{
+        $data['user'] = User::with('addressBooks')->find($user_id);
+
+        if ($data['user']) {
+            $data['address'] = $data['user']->addressBooks; // You have the addresses from eager loading
+            return view('cart.checkout', $data);
+        } else {
             return view('cart.checkout');
         }
 

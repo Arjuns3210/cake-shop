@@ -6,7 +6,7 @@
     <div class="orderTrack">
         <div class="row m-auto">
             <div class=" col-sm-4">
-                <img src="{{url('public/img/trackorder.png')}}"  class="img-fluid">
+                <img src="{{asset('img/trackorder.png')}}"  class="img-fluid">
             </div>
             <div class=" col-sm-8 trorder">
                 <div class="trorder-heading">Track Order</div>
