@@ -16,13 +16,13 @@
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner" style="height: 500px;">
                     <div class="carousel-item active">
-                        <img src="{{ url('public/img/l.png') }}" alt="Los Angeles" class="d-block img-fluid" style="width:100%">
+                        <img src="{{ url('img/l.png') }}" alt="Los Angeles" class="d-block img-fluid" style="width:100%">
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ url('public/img/l1.png') }}" alt="Chicago" class="d-block img-fluid" style="width:100%">
+                        <img src="{{ url('img/l1.png') }}" alt="Chicago" class="d-block img-fluid" style="width:100%">
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ url('public/img/l2.png') }}" alt="New York" class="d-block img-fluid" style="width:100%">
+                        <img src="{{ url('img/l2.png') }}" alt="New York" class="d-block img-fluid" style="width:100%">
                     </div>
                     </div>
 

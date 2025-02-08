@@ -111,7 +111,7 @@
                         </div>
                         <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
                             <div class="card-body">
-                                @if(!empty($address))
+                                @if(count($address)>0)
                                 <div id="addList">
                                     @foreach($address as $add)
                                     <div class="cartList">

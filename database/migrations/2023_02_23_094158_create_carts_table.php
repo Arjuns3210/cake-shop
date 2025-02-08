@@ -22,9 +22,9 @@ class CreateCartsTable extends Migration
             $table->string('cake_massage',255)->nullable();
             $table->string('cake_quentity',255);
             $table->string('img_name',255);
-            $table->string('location',255);
+            $table->string('location',255)->nullable();
             $table->string('device_id',255);
-            $table->enum('statsus', [1, 0])->default(1);
+            $table->enum('status', [1, 0])->default(1);
             $table->integer('created_by')->default(0);
             $table->integer('updated_by')->default(0);
             $table->softDeletes();
