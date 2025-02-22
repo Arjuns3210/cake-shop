@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function addressBooks()
+    {
+        return $this->hasMany(AddressBook::class, 'user_id'); // 'user_id' is the foreign key in the 'address_books' table
+    }
+
 }

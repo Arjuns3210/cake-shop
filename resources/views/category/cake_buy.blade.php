@@ -33,7 +33,7 @@
 				<span>(Inclusive of GST)</span>
 				<h5>Select Weight</h5>
 				<div class="weight-price">
-					<div class="kg" onclick="kgPrice(1,this)">0.5 Kg</div>
+					<div class="kg" onclick="kgPrice(1,this)" style="background-color: #abfff0; box-shadow: 0 0 7px; color: red; padding: 10px; border-radius: 5px; cursor: pointer;">0.5 Kg</div>
 					<div class="kg" onclick="kgPrice(2,this)">1 Kg</div>
 					<div class="kg" onclick="kgPrice(2.5,this)">1.5 Kg</div>
 					<div class="kg" onclick="kgPrice(4.3,this)">2 Kg</div>
@@ -53,7 +53,7 @@
 						<input type="hidden" name="cake_price" value="{{$cakes->cake_price}}" id="cake_price">
 						<input type="hidden" name="cake_weight" value="0.5 Kg" id="cake_weight">
 						<input type="hidden" name="cake_quentity" value="1">
-					<input type="text" name="cake_massage" placeholder="Enter message on cake" class="form-control required" required id="cMessage" maxlength='25'><br>
+					<input type="text" name="cake_massage" placeholder="Enter message on cake" class="form-control required" required id="cMessage" maxlength='25' value="Happ Bday Arjun"><br>
 					<span class="message-length">25 characters left</span>
 				</div>
 				<div class="customerMsg mt-2">

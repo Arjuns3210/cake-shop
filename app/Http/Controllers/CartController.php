@@ -21,8 +21,8 @@ class CartController extends Controller
     public function index()
     {
         $user_id = session::get('Uid');
-        $data['cart_items'] = Cart::where('user_id',$user_id)->get();
-        // dd($data['cart_items']);
+        $data['cart_items'] = Cart::with('cake')->where('user_id',$user_id)->get();
+
         $data['count'] = $data['cart_items']->sum('cake_quentity');
         $data['cartP'] = $data['cart_items']->sum('cake_price'); 
 
@@ -37,8 +37,7 @@ class CartController extends Controller
     private function validateCartRequest(Request $request)
     {
         return \Validator::make($request->all(), [
-            'cake_massage' => 'required',
-            'location' => 'required',
+            'cake_massage' => 'required'
         ])->errors();
     }
     public function addToCart(Request $request)
@@ -91,8 +90,10 @@ class CartController extends Controller
         // Save the data (either updated or newly created)
         $data->save();
 
+        $cartCount = session()->get('cart', 0) + 1; // Get current count and increment
+        session()->put('cart', $cartCount);
+        session()->save();
 
-        // $request->session()->put('cart',$cart);
         $message->successMessage('Added To Cart', $msg_data);
     }
 
@@ -105,15 +106,17 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
 
-        $data['cart_items'] = Cart::all();
-        $data['cartP'] = Cart::sum('cake_price');
+        $user_id = session('Uid');
+        $data['cart_items'] = Cart::with('cake')->where('user_id',$user_id)->get();
+        $data['cartP'] = $data['cart_items']->sum('cake_price'); 
 
-        $value = session('Uid');
-        $data['user'] = User::where('id',$value)->first();
-        if($data['user']){
-            $data['address'] = AddressBook::where('user_id',$data['user']->id)->get();
-            return view('cart.checkout',$data);
-        }else{
+        $data['user'] = User::with('addressBooks')->find($user_id);
+
+        if ($data['user']) {
+            $data['address'] = $data['user']->addressBooks; // You have the addresses from eager loading
+
+            return view('cart.checkout', $data);
+        } else {
             return view('cart.checkout');
         }
 
@@ -157,7 +160,13 @@ class CartController extends Controller
         $cart=Cart::find($id);
         $cart->cake_price=$price;
         $cart->cake_quentity=$val;
+
         $cart->save();
+
+        $totalCartQuantity = Cart::where('user_id', session()->get('Uid'))->sum('cake_quentity');
+
+        session()->put('cart', $totalCartQuantity);
+        session()->save();
         $message->successMessage('quantity updated', $msg_data);
     }
 
@@ -171,7 +180,10 @@ class CartController extends Controller
     {
         $cart = Cart::find($id);
         $cart->delete();
+        $totalCartQuantity = Cart::where('user_id', session()->get('Uid'))->sum('cake_quentity');
 
+        session()->put('cart', $totalCartQuantity);
+        session()->save();
         return response()->json(['success' => 'cart deleted']);
     }
 }

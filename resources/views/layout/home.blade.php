@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -73,7 +73,7 @@
                     <li class="nav-item lr ">
                         <a class="nav-link" href="{{url('cart')}}"><i class="fa fa-cart-arrow-down"
                                 style='font-size:24px'></i></a>
-                        <div class="coutCart">({{session::get('cart')}})</div>
+                        <div class="coutCart">{{ session()->get('cart') > 0 ? '(' . session()->get('cart') . ')' : '' }}</div>
                         <span class="card-span">My Cart</span>
                     </li>
                     <li class="nav-item dropdown">
@@ -107,7 +107,8 @@
                     <li class="nav-item lr ">
                         <a class="nav-link" href="{{url('cart')}}"><i class="fa fa-cart-arrow-down"
                                 style='font-size:24px'></i></a>
-                        <div class="coutCart">({{session::get('cart')??''}})</div>
+                        <div class="coutCart">{{ session()->get('cart') > 0 ? '(' . session()->get('cart') . ')' : '' }}</div>
+
                         <span class="card-span">My Cart</span>
                     </li>
                     <li class="nav-item lr">

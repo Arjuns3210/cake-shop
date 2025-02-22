@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div id="myOrder" class="container tab-pane fade"><br>
-                            <div class="myPro" style="height:250px;">
+                            <div class="myPro" style="min-height:250px;">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li>
                                         <a class="nav-link active" data-bs-toggle="tab" href="#recent">Recent Orders</a>
@@ -93,9 +93,51 @@
                                 <div class="tab-content">
                                     <div id="recent" class="container tab-pane active"><br>
                                         <div>
-                                            <span>Recent Oders</span>
+                                            <h5>Recent Orders</h5>
                                         </div>
+
+                                        @php
+                                            $orders = App\Models\Order::with('orderItems.cake')
+                                                ->where('user_id', session('Uid'))
+                                                ->latest()
+                                                ->take(5) // Fetch last 5 orders
+                                                ->get();
+                                        @endphp
+
+                                        @if ($orders->isNotEmpty())
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Order ID</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Status</th>
+                                                            <th>Order Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($orders as $order)
+                                                            @foreach ($order->orderItems as $item)
+                                                                <tr>
+                                                                    <td>{{ $order->id }}</td>
+                                                                    <td>{{ $item->cake->cake_name ?? 'Cake Not Found' }}</td>
+                                                                    <td>{{ $item->quantity }}</td>
+                                                                    <td>₹{{ number_format($item->payment_amount, 2) }}</td>
+                                                                    <td>{{ ucfirst($order->status) }}</td>
+                                                                    <td>{{ $order->created_at->format('d M Y') }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        @else
+                                            <p>No recent orders found.</p>
+                                        @endif
                                     </div>
+
                                     <div id="past" class="container tab-pane fade"><br>
                                         <div>
                                             <span>Past Oders</span>
@@ -211,7 +253,7 @@
         @else
             <div>
                 <div class="" style="margin:10em 0">
-                    <img src="{{url('public/img/not found.png')}}" width="350px">
+                    <img src="{{url('img/not found.png')}}" width="350px">
                     <span class="card-heading" style="margin-left:5vw">Please <a class="text-danger" href="{{url('login')}}">Login</a> to Acces Your Account</span>
                 </div>
             </div>

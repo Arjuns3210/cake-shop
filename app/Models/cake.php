@@ -17,4 +17,9 @@ class cake extends Model
 
         // return $this->belongsTo('app\Models\Category');
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'cake_id'); // Assuming 'cake_id' is the foreign key in the cart table
+    }
 }

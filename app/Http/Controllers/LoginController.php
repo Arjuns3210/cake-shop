@@ -43,18 +43,21 @@ class LoginController extends Controller
 
     public function Login(Request $request)
     {
-        $cart=cart::sum('cake_quentity');
+        $user= user::where('email',$request->email)->first();
+        if (!$user) {
+            return redirect()->back()->withErrors(['email' => 'No account found with this email.']);
+        }
+        $cart = Cart::where('user_id', $user->id)->sum('cake_quentity');
 
-        $user= user::where('email',$request->email)->get();
         $validator = $this->rules($request->all());
         if($validator->fails()){
             return redirect()->back()->withErrors($validator);   
         }
         else{
-            if($user[0]->password==md5($request->email.$request->password)){
-                $request->session()->put('Uid',$user[0]->id);
-                $request->session()->put('user',$user[0]->user_name);
-                $request->session()->put('email',$user[0]->email);
+            if($user->password==md5($request->email.$request->password)){
+                $request->session()->put('Uid',$user->id);
+                $request->session()->put('user',$user->user_name);
+                $request->session()->put('email',$user->email);
                 $request->session()->put('cart',$cart);
                 return redirect('/');
             }

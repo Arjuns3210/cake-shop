@@ -39,7 +39,7 @@ function submitForm(form_id, form_method, errorOverlay = "") {
                         if(form_id=='saveUser'){
                             setTimeout(function () {
 
-                            window.location.href = "/cake-shop";
+                            window.location.href = "/";
                             }, 3000);
                         }else{
                             setTimeout(function () {
