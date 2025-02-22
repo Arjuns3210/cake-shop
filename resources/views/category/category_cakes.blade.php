@@ -66,38 +66,15 @@
                         <i class="fa fa-arrow-right" style="font-size: 30px;color: red;"></i>
                     </button>
                 </div>
-                        <!-- <img class="card-img-top" src="{{'../storage/app/'.$cake->img_path}}" alt="Card image" style="width:100%"> -->
                         <div class="card-body">
                             <h5 class="mt-2 text-left">{{$cake->cake_name}}</h5>
                             <p class="card-text"><i class="fas fa-rupee-sign"></i>{{$cake->cake_price}}</p>
-                            <!-- <p class="card-text">{{$cake->cake_description}}</p> -->
                         </div>
                     </div></a>
                 @endforeach
             @else
                 <div class="card-heading">No {{$category->category_name}} cake found</div>
             @endif
-           <!--  <div class="card2">
-                <img class="card-img-top" src="{{ url('public/img/chocolate.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">Chocolate</h4>
-                    <p class="card-text">For choco addicts</p>
-                </div>
-            </div>
-            <div class="card2">
-                <img class="card-img-top" src="{{ url('public/img/chocolate.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title"  >Chocolate</h4>
-                    <p class="card-text">For choco addicts</p>
-                </div>
-            </div>
-            <div class="card2">
-                <img class="card-img-top" src="{{ url('public/img/chocolate.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">Chocolate</h4>
-                    <p class="card-text">For choco addicts</p>
-                </div>
-            </div> -->
         </div>
         @else
             <h5 class="text-danger mt-2">Showing results for- {{$sData}} ({{count($cakes)}} Cakes)</h5>
@@ -156,27 +133,6 @@
             </div>
             <div class="card-heading">Sorry, we couldn't find what you are looking for</div>
             @endif
-           <!--  <div class="card2">
-                <img class="card-img-top" src="{{ url('public/img/chocolate.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">Chocolate</h4>
-                    <p class="card-text">For choco addicts</p>
-                </div>
-            </div>
-            <div class="card2">
-                <img class="card-img-top" src="{{ url('public/img/chocolate.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title"  >Chocolate</h4>
-                    <p class="card-text">For choco addicts</p>
-                </div>
-            </div>
-            <div class="card2">
-                <img class="card-img-top" src="{{ url('public/img/chocolate.png') }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">Chocolate</h4>
-                    <p class="card-text">For choco addicts</p>
-                </div>
-            </div> -->
         </div>
         @endif
     </div>

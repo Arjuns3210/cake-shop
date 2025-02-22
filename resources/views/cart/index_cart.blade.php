@@ -15,7 +15,7 @@
         <!-- If the cart is empty, show this message -->
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
-                <img src="{{ asset('images/empty.png') }}" alt="Empty Cart" 
+                <img src="{{ asset('img/empty.png') }}" alt="Empty Cart" 
                      style="width: 100%; max-width: 300px; animation: bounce 2s infinite;">
                 <h2 style="color: #333; font-family: 'Poppins', sans-serif; font-weight: bold; margin-top: 20px;">
                     Oh no! Your cart is feeling lonely 😔

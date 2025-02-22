@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div id="myOrder" class="container tab-pane fade"><br>
-                            <div class="myPro" style="height:250px;">
+                            <div class="myPro" style="min-height:250px;">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li>
                                         <a class="nav-link active" data-bs-toggle="tab" href="#recent">Recent Orders</a>
